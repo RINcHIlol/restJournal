@@ -1,4 +1,4 @@
-package main
+package rest
 
 type User struct {
 	Id       int    `json:"-" db:"id"`
@@ -14,3 +14,5 @@ type Roles struct {
 	Teacher     string `json:"teacher"`
 	HeadTeacher string `json:"head_teacher"`
 }
+
+// .l.

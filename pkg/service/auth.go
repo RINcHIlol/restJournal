@@ -20,7 +20,7 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user user.User) (int, error) {
-	//
+	user.
 }
 
 func generatePasswordHash(password string) string {
