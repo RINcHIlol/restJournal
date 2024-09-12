@@ -1,18 +1,23 @@
 package service
 
-import "rest_journal/pkg/repository"
+import (
+	restJournal "rest_journal"
+	"rest_journal/pkg/repository"
+)
 
-type Authorization interface{}
+type Authorization interface {
+	CreateUser(user restJournal.User) (int, error)
+}
 
 //more
 
 //more
 
 type Service struct {
-	Authorization Authorization
+	Authorization
 }
 
-func NewService(repos repository.Repository) *Service {
+func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
 	}

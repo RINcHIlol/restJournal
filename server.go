@@ -1,4 +1,4 @@
-package main
+package restJournal
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-type server struct {
+type Server struct {
 	httpServer *http.Server
 }
 
-func (s *server) Start(port string, handler http.Handler) error {
+func (s *Server) Start(port string, handler http.Handler) error {
 	s.httpServer = &http.Server{
 		Addr:           ":" + port,
 		Handler:        handler,
@@ -22,6 +22,6 @@ func (s *server) Start(port string, handler http.Handler) error {
 	return s.httpServer.ListenAndServe()
 }
 
-func (s *server) Stop(ctx context.Context) error {
+func (s *Server) Stop(ctx context.Context) error {
 	return s.httpServer.Shutdown(ctx)
 }

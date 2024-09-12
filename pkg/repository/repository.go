@@ -1,12 +1,20 @@
 package repository
 
+import (
+	"github.com/jmoiron/sqlx"
+	restJournal "rest_journal"
+)
+
 type Authorization interface {
+	CreateUser(user restJournal.User) (int, error)
 }
 
 type Repository struct {
-	Authorization Authorization
+	Authorization
 }
 
-func NewRepository(authorization Authorization) *Repository {
-	//todo
+func NewRepository(db *sqlx.DB) *Repository {
+	return &Repository{
+		Authorization: NewAuthPostgres(db),
+	}
 }

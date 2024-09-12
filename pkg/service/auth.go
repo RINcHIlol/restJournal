@@ -3,7 +3,7 @@ package service
 import (
 	"crypto/sha1"
 	"fmt"
-	"os/user"
+	restJournal "rest_journal"
 	"rest_journal/pkg/repository"
 )
 
@@ -19,8 +19,9 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 	return &AuthService{repo: repo}
 }
 
-func (s *AuthService) CreateUser(user user.User) (int, error) {
-	user.
+func (s *AuthService) CreateUser(user restJournal.User) (int, error) {
+	user.Password = generatePasswordHash(user.Password)
+	return s.repo.CreateUser(user)
 }
 
 func generatePasswordHash(password string) string {
