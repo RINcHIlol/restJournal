@@ -32,7 +32,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			students := lists.Group("/students")
 			{
 				students.GET("/", h.getAllStudents)
-				students.GET("/", h.getStudentById)
+				students.GET("/:id", h.getStudentById)
 			}
 
 			teachers := lists.Group("/teachers")
