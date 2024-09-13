@@ -9,3 +9,8 @@ func (h *Handler) getAllGroups(ctx *gin.Context) {
 func (h *Handler) getGroupById(ctx *gin.Context) {
 	//todo
 }
+
+// под вопросом(тут ли, надо ли, такое ли название)
+//func (h *Handler) getAllStudentsByGroup(ctx *gin.Context) {
+//
+//}

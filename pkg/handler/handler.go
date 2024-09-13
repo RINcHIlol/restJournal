@@ -46,6 +46,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				groups.GET("/", h.getAllGroups)
 				groups.GET("/:id", h.getGroupById)
 			}
+
+			specialties := lists.Group("/specialties")
+			{
+				specialties.GET("/", h.getAllSpecialties)
+				specialties.GET("/:id", h.getSpecialtyById)
+			}
 		}
 	}
 
