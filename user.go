@@ -2,15 +2,16 @@ package restJournal
 
 // заполнено
 type User struct {
-	Id        int    `json:"-" db:"id"`
-	Name      string `json:"name" db:"name" binding:"required"`
-	Surname   string `json:"surname" db:"surname" binding:"required"`
-	Email     string `json:"email" db:"email" binding:"required"`
-	Password  string `json:"password" db:"password" binding:"required"`
-	Role      string `json:"role" db:"role" binding:"required"`
-	Specialty string `json:"specialty" db:"specialty" binding:"required"`
+	Id          int    `json:"-" db:"id"`
+	Name        string `json:"name" db:"name" binding:"required"`
+	Surname     string `json:"surname" db:"surname" binding:"required"`
+	Email       string `json:"email" db:"email" binding:"required"`
+	Password    string `json:"password" db:"password" binding:"required"`
+	Role        string `json:"role" db:"role" binding:"required"`
+	SpecialtyId int    `json:"specialty_id" db:"specialty_id" binding:"required"`
 }
 
+// заполнено
 type Group struct {
 	Id          int    `json:"-" db:"id"`
 	Name        string `json:"name" db:"name" binding:"required"`
