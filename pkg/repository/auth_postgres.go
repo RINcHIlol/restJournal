@@ -24,3 +24,11 @@ func (r *AuthPostgres) CreateUser(user restJournal.User) (int, error) {
 
 	return id, nil
 }
+
+func (r *AuthPostgres) GetUser(email, password string) (restJournal.User, error) {
+	var user restJournal.User
+
+	query := fmt.Sprintf(`SELECT * FROM %s WHERE email = $1 AND password = $2`, usersTable)
+	err := r.db.Get(&user, query, email, password)
+	return user, err
+}

@@ -7,6 +7,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user restJournal.User) (int, error)
+	GetUser(email, password string) (restJournal.User, error)
 }
 
 type Repository struct {
