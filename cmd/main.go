@@ -13,7 +13,7 @@ import (
 
 func main() {
 	if err := initConfig(); err != nil {
-		logrus.Fatal(err)
+		logrus.Fatal(err.Error())
 	}
 
 	if err := godotenv.Load(); err != nil {
@@ -30,7 +30,7 @@ func main() {
 	})
 
 	if err != nil {
-		logrus.Fatal(err)
+		logrus.Fatal(err.Error())
 	}
 
 	repos := repository.NewRepository(db)

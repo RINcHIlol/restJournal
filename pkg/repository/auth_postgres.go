@@ -16,7 +16,7 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 
 func (r *AuthPostgres) CreateUser(user restJournal.User) (int, error) {
 	var id int
-	query := fmt.Sprintf(`INSERT INTO %s (name, username, email, password, role) values ($1, $2, $3, $4, $5) RETURNING id)`)
+	query := fmt.Sprintf(`INSERT INTO %s (name, surname, email, password, role) values ($1, $2, $3, $4, $5) RETURNING id`, usersTable)
 	row := r.db.QueryRow(query, user.Name, user.Surname, user.Email, user.Password, user.Role)
 	if err := row.Scan(&id); err != nil {
 		return 0, err
