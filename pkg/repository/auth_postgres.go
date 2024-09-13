@@ -1,8 +1,10 @@
 package repository
 
 import (
+	"errors"
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	"github.com/lib/pq"
 	restJournal "rest_journal"
 )
 
@@ -17,11 +19,16 @@ func NewAuthPostgres(db *sqlx.DB) *AuthPostgres {
 func (r *AuthPostgres) CreateUser(user restJournal.User) (int, error) {
 	var id int
 	query := fmt.Sprintf(`INSERT INTO %s (name, surname, email, password, role) values ($1, $2, $3, $4, $5) RETURNING id`, usersTable)
-	row := r.db.QueryRow(query, user.Name, user.Surname, user.Email, user.Password, user.Role)
-	if err := row.Scan(&id); err != nil {
+	err := r.db.QueryRow(query, user.Name, user.Surname, user.Email, user.Password, user.Role).Scan(&id)
+
+	if err != nil {
+		if pqErr, ok := err.(*pq.Error); ok {
+			if pqErr.Code == "23514" {
+				return 0, errors.New("invalid role: must be one of 'student', 'teacher', 'headTeacher'")
+			}
+		}
 		return 0, err
 	}
-
 	return id, nil
 }
 

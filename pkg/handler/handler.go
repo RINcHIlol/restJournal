@@ -25,6 +25,30 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.GET("/refresh", h.refresh)
 	}
 
+	api := router.Group("/api")
+	{
+		lists := api.Group("/lists")
+		{
+			students := lists.Group("/students")
+			{
+				students.GET("/", h.getAllStudents)
+				students.GET("/", h.getStudentById)
+			}
+
+			teachers := lists.Group("/teachers")
+			{
+				teachers.GET("/", h.getAllTeachers)
+				teachers.GET("/:id", h.getTeacherById)
+			}
+
+			groups := lists.Group("/groups")
+			{
+				groups.GET("/", h.getAllGroups)
+				groups.GET("/:id", h.getGroupById)
+			}
+		}
+	}
+
 	//journal := router.Group("/journal"){
 	//	journal.
 	//}
