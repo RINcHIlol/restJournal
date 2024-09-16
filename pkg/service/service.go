@@ -16,6 +16,11 @@ type Students interface {
 	GetById(studentId int) (restJournal.UserParse, error)
 }
 
+type Teachers interface {
+	GetAll() ([]restJournal.UserParse, error)
+	GetById(teacherId int) (restJournal.UserParse, error)
+}
+
 //more
 
 //more
@@ -23,11 +28,13 @@ type Students interface {
 type Service struct {
 	Authorization
 	Students
+	Teachers
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
 		Students:      NewStudentsService(repos.Students),
+		Teachers:      NewTeachersService(repos.Teachers),
 	}
 }
