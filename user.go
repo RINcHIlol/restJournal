@@ -11,6 +11,14 @@ type User struct {
 	SpecialtyId int    `json:"specialty_id" db:"specialty_id" binding:"required"`
 }
 
+type UserParse struct {
+	Name      string `db:"name"`
+	Surname   string `db:"surname"`
+	Email     string `db:"email"`
+	Role      string `db:"role"`
+	Specialty string `db:"specialty"` // Добавьте это поле для специальности
+}
+
 // заполнено
 type Group struct {
 	Id          int    `json:"-" db:"id"`

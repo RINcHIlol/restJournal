@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	restJournal "rest_journal"
@@ -50,6 +51,26 @@ func (s *AuthService) GenerateToken(email, password string) (string, error) {
 	})
 
 	return token.SignedString([]byte(signingKey))
+}
+
+func (s *AuthService) ParseToken(accessToken string) (int, string, error) {
+	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("invalid method")
+		}
+
+		return []byte(signingKey), nil
+	})
+	if err != nil {
+		return 0, "", err
+	}
+
+	claims, ok := token.Claims.(*tokenClaims)
+	if !ok {
+		return 0, "", errors.New("invalid token")
+	}
+
+	return claims.UserId, claims.UserRole, nil
 }
 
 func generatePasswordHash(password string) string {
