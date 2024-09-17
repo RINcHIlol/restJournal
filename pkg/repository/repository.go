@@ -20,10 +20,17 @@ type Teachers interface {
 	GetById(teacherId int) (restJournal.UserParse, error)
 }
 
+type Groups interface {
+	GetAll() ([]restJournal.Group, error)
+	GetById(groupId int) (restJournal.Group, error)
+	GetAllStudents(groupId int) ([]restJournal.UserParse, error)
+}
+
 type Repository struct {
 	Authorization
 	Students
 	Teachers
+	Groups
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -31,5 +38,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Authorization: NewAuthPostgres(db),
 		Students:      NewStudentsPostgres(db),
 		Teachers:      NewTeachersPostgres(db),
+		Groups:        NewGroupsPostgres(db),
 	}
 }
