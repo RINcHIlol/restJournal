@@ -1,6 +1,5 @@
 package restJournal
 
-// заполнено
 type User struct {
 	Id          int    `json:"-" db:"id"`
 	Name        string `json:"name" db:"name" binding:"required"`
@@ -11,15 +10,15 @@ type User struct {
 	SpecialtyId int    `json:"specialty_id" db:"specialty_id" binding:"required"`
 }
 
+// нет в бд
 type UserParse struct {
 	Name      string `db:"name"`
 	Surname   string `db:"surname"`
 	Email     string `db:"email"`
 	Role      string `db:"role"`
-	Specialty string `db:"specialty"` // Добавьте это поле для специальности
+	Specialty string `db:"specialty"`
 }
 
-// заполнено
 type Group struct {
 	Id          int    `json:"-" db:"id"`
 	Name        string `json:"name" db:"name" binding:"required"`
@@ -34,9 +33,19 @@ type GroupUser struct {
 	UserId  int `json:"user_id" db:"user_id" binding:"required"`
 }
 
-// заполнено
 type Specialty struct {
 	Id          int    `json:"-" db:"id"`
 	Name        string `json:"name" db:"name" binding:"required"`
 	Description string `json:"description" db:"description"`
+}
+
+type Subjects struct {
+	Id          int    `json:"-" db:"id"`
+	Name        string `json:"name" db:"name" binding:"required"`
+	Description string `json:"description" db:"description"`
+}
+
+type SpecialtySubjects struct {
+	SpecialtyId int `json:"specialty_id" db:"specialty_id" binding:"required"`
+	SubjectId   int `json:"subject_id" db:"subject_id" binding:"required"`
 }

@@ -53,6 +53,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				specialties.GET("/", h.getAllSpecialties)
 				specialties.GET("/:id", h.getSpecialtyById)
 			}
+
+			subjects := lists.Group("/subjects")
+			{
+				subjects.GET("/", h.getAllSubjects)
+				subjects.GET("/:id", h.getSubjectById)
+				subjects.GET("/specialties/:id", h.getSubjectsBySpecialty)
+			}
 		}
 	}
 

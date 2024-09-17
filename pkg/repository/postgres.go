@@ -7,10 +7,12 @@ import (
 )
 
 const (
-	usersTable       = "users"
-	groupsTable      = "groups"
-	specialtiesTable = "specialties"
-	groupUsersTable  = "group_users"
+	usersTable             = "users"
+	groupsTable            = "groups"
+	specialtiesTable       = "specialties"
+	groupUsersTable        = "group_users"
+	subjectsTable          = "subjects"
+	specialtySubjectsTable = "specialty_subjects"
 )
 
 type Config struct {
