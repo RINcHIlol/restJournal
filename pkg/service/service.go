@@ -27,6 +27,11 @@ type Groups interface {
 	GetAllStudents(groupId int) ([]restJournal.UserParse, error)
 }
 
+type Specialties interface {
+	GetAll() ([]restJournal.Specialty, error)
+	GetById(id int) (restJournal.Specialty, error)
+}
+
 //more
 
 //more
@@ -36,6 +41,7 @@ type Service struct {
 	Students
 	Teachers
 	Groups
+	Specialties
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -44,5 +50,6 @@ func NewService(repos *repository.Repository) *Service {
 		Students:      NewStudentsService(repos.Students),
 		Teachers:      NewTeachersService(repos.Teachers),
 		Groups:        NewGroupsService(repos.Groups),
+		Specialties:   NewSpecialtiesService(repos.Specialties),
 	}
 }
