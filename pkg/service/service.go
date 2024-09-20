@@ -35,7 +35,7 @@ type Specialties interface {
 type Subjects interface {
 	GetAll() ([]restJournal.Subjects, error)
 	GetById(id int) (restJournal.Subjects, error)
-	getSubjectsBySpecialty(id int) ([]restJournal.Subjects, error)
+	GetSubjectsBySpecialty(id int) ([]restJournal.Subjects, error)
 }
 
 //more
