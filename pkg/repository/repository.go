@@ -37,6 +37,10 @@ type Subjects interface {
 	GetBySpec(id int) ([]restJournal.Subjects, error)
 }
 
+type JournalGroups interface {
+	GetAll(id int, subject int) ([]restJournal.StudentGrade, error)
+}
+
 type Repository struct {
 	Authorization
 	Students
@@ -44,6 +48,7 @@ type Repository struct {
 	Groups
 	Specialties
 	Subjects
+	JournalGroups
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -54,5 +59,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Groups:        NewGroupsPostgres(db),
 		Specialties:   NewSpecialtiesPostgres(db),
 		Subjects:      NewSubjectsPostgres(db),
+		JournalGroups: NewJournalGroupsPostgres(db),
 	}
 }

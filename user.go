@@ -1,5 +1,7 @@
 package restJournal
 
+import "time"
+
 type User struct {
 	Id          int    `json:"-" db:"id"`
 	Name        string `json:"name" db:"name" binding:"required"`
@@ -48,4 +50,23 @@ type Subjects struct {
 type SpecialtySubjects struct {
 	SpecialtyId int `json:"specialty_id" db:"specialty_id" binding:"required"`
 	SubjectId   int `json:"subject_id" db:"subject_id" binding:"required"`
+}
+
+type Grade struct {
+	Id        int       `json:"id" db:"id"`
+	UserId    int       `json:"user_id" db:"user_id"`
+	SubjectId int       `json:"subject_id" db:"subject_id"`
+	TeacherId int       `json:"teacher_id" db:"teacher_id"`
+	GroupId   int       `json:"group_id" db:"group_id"`
+	Grade     int       `json:"grade" db:"grade"`
+	CreatedAt time.Time `json:"created_at" db:"created_at"`
+}
+
+// нет в бд(парсинг учеников с оценками)
+type StudentGrade struct {
+	StudentName    string    `db:"student_name"`
+	StudentSurname string    `db:"student_surname"`
+	Grade          int       `db:"grade"`
+	SubjectName    string    `db:"subject_name"`
+	CreatedAt      time.Time `db:"created_at"`
 }

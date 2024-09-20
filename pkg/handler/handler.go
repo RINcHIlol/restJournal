@@ -61,11 +61,23 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				subjects.GET("/specialties/:id", h.getSubjectsBySpecialty)
 			}
 		}
-	}
 
-	//journal := router.Group("/journal"){
-	//	journal.
-	//}
+		journal := api.Group("/journal")
+		{
+			group := journal.Group("/group")
+			{
+				group.GET("/:id/:subject", h.getGradesGroup)
+
+				student := journal.Group("/:id_group/student")
+				{
+					student.GET("/:id_student", h.getStudentGrades)
+					student.PUT("/:id_student", h.updateStudentGrade)
+					student.POST("/:id_student", h.addStudentGrade)
+					student.DELETE("/:id_student", h.deleteStudentGrade)
+				}
+			}
+		}
+	}
 
 	return router
 }

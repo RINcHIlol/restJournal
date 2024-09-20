@@ -38,6 +38,10 @@ type Subjects interface {
 	GetSubjectsBySpecialty(id int) ([]restJournal.Subjects, error)
 }
 
+type JournalGroups interface {
+	GetAll(id int, subject int) ([]restJournal.StudentGrade, error)
+}
+
 //more
 
 //more
@@ -49,6 +53,7 @@ type Service struct {
 	Groups
 	Specialties
 	Subjects
+	JournalGroups
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -59,5 +64,6 @@ func NewService(repos *repository.Repository) *Service {
 		Groups:        NewGroupsService(repos.Groups),
 		Specialties:   NewSpecialtiesService(repos.Specialties),
 		Subjects:      NewSubjectsService(repos.Subjects),
+		JournalGroups: NewJournalGroupsService(repos.JournalGroups),
 	}
 }
