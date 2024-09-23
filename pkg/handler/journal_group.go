@@ -7,7 +7,17 @@ import (
 )
 
 func (h *Handler) getGradesGroup(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	role, err := getUserRole(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	if role != "teacher" {
+		newErrorResponse(c, http.StatusForbidden, "You are not the teacher")
+		return
+	}
+
+	id, err := strconv.Atoi(c.Param("id_group"))
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

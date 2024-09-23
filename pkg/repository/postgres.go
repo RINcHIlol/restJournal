@@ -13,6 +13,7 @@ const (
 	groupUsersTable        = "group_users"
 	subjectsTable          = "subjects"
 	specialtySubjectsTable = "specialty_subjects"
+	gradesTable            = "grades"
 )
 
 type Config struct {

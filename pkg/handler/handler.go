@@ -64,16 +64,16 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		journal := api.Group("/journal")
 		{
-			group := journal.Group("/group")
+			group := journal.Group("/group/:id_group")
 			{
-				group.GET("/:id/:subject", h.getGradesGroup)
+				group.GET("/subject/:subject", h.getGradesGroup)
 
-				student := journal.Group("/:id_group/student")
+				students := group.Group("/students")
 				{
-					student.GET("/:id_student", h.getStudentGrades)
-					student.PUT("/:id_student", h.updateStudentGrade)
-					student.POST("/:id_student", h.addStudentGrade)
-					student.DELETE("/:id_student", h.deleteStudentGrade)
+					students.GET("/:id_student", h.getStudentGrades)
+					students.PUT("/:id_student", h.updateStudentGrade)
+					students.POST("/", h.addStudentGrade)
+					students.DELETE("/:id_student", h.deleteStudentGrade)
 				}
 			}
 		}

@@ -42,6 +42,14 @@ type JournalGroups interface {
 	GetAll(id int, subject int) ([]restJournal.StudentGrade, error)
 }
 
+// в put проверяй id юзера на id учителя тип ток он может менять чо поставил
+type JournalStudents interface {
+	GetStudentGrades(studentId, teacherId int) ([]restJournal.StudentGrade, error)
+	PutStudentGrade(gradeId int) error
+	PostStudentGrade(grade restJournal.Grade) error
+	DeleteStudentGrade(gradeId int) error
+}
+
 //more
 
 //more
@@ -54,16 +62,18 @@ type Service struct {
 	Specialties
 	Subjects
 	JournalGroups
+	JournalStudents
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Authorization: NewAuthService(repos.Authorization),
-		Students:      NewStudentsService(repos.Students),
-		Teachers:      NewTeachersService(repos.Teachers),
-		Groups:        NewGroupsService(repos.Groups),
-		Specialties:   NewSpecialtiesService(repos.Specialties),
-		Subjects:      NewSubjectsService(repos.Subjects),
-		JournalGroups: NewJournalGroupsService(repos.JournalGroups),
+		Authorization:   NewAuthService(repos.Authorization),
+		Students:        NewStudentsService(repos.Students),
+		Teachers:        NewTeachersService(repos.Teachers),
+		Groups:          NewGroupsService(repos.Groups),
+		Specialties:     NewSpecialtiesService(repos.Specialties),
+		Subjects:        NewSubjectsService(repos.Subjects),
+		JournalGroups:   NewJournalGroupsService(repos.JournalGroups),
+		JournalStudents: NewJournalStudentsService(repos.JournalStudents),
 	}
 }
