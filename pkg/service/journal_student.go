@@ -17,8 +17,8 @@ func (s *JournalStudentsService) GetStudentGrades(studentId, teacherId int) ([]r
 	return s.repo.GetById(studentId, teacherId)
 }
 
-func (s *JournalStudentsService) PutStudentGrade(gradeId int) error {
-	return s.repo.PutById(gradeId)
+func (s *JournalStudentsService) PutStudentGrade(gradeId, teacherId, grade int) error {
+	return s.repo.PutById(gradeId, teacherId, grade)
 }
 
 func (s *JournalStudentsService) PostStudentGrade(grade restJournal.Grade) error {

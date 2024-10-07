@@ -14,7 +14,7 @@ func NewJournalStudentsPostgres(db *sqlx.DB) *JournalStudentsPostgres {
 	return &JournalStudentsPostgres{db: db}
 }
 
-func (r *JournalStudentsPostgres) GetById(studentId int, teacherId int) ([]restJournal.StudentGrade, error) {
+func (r *JournalStudentsPostgres) GetById(studentId, teacherId int) ([]restJournal.StudentGrade, error) {
 	var grades []restJournal.StudentGrade
 	var gradeId int
 
@@ -39,7 +39,21 @@ func (r *JournalStudentsPostgres) GetById(studentId int, teacherId int) ([]restJ
 	return grades, nil
 }
 
-func (r *JournalStudentsPostgres) PutById(gradeId int) error {
+func (r *JournalStudentsPostgres) PutById(gradeId, teacherId, grade int) error {
+	var trueTeacherId int
+	query := fmt.Sprintf(`SELECT teacher_id FROM %s WHERE id = $1`, gradesTable)
+	err := r.db.QueryRow(query, gradeId).Scan(&trueTeacherId)
+	if err != nil {
+		return err
+	}
+	if trueTeacherId != teacherId {
+		return fmt.Errorf("you can't get that")
+	}
+	query = fmt.Sprintf(`UPDATE %s SET grade = $1 WHERE id = $2`, gradesTable)
+	_, err = r.db.Exec(query, grade, gradeId)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

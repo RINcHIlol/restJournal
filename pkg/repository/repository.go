@@ -44,7 +44,7 @@ type JournalGroups interface {
 // в put проверяй id юзера на id учителя тип ток он может менять чо поставил
 type JournalStudents interface {
 	GetById(studentId, teacherId int) ([]restJournal.StudentGrade, error)
-	PutById(gradeId int) error
+	PutById(gradeId, teacherId, grade int) error
 	Post(grade restJournal.Grade) error
 	DeleteById(gradeId int) error
 }

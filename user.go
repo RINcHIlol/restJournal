@@ -70,3 +70,9 @@ type StudentGrade struct {
 	SubjectName    string    `db:"subject_name"`
 	CreatedAt      time.Time `db:"created_at"`
 }
+
+// нет в бд(парсинг учеников с оценками)
+type MiniGrade struct {
+	Id    int `json:"id" db:"id"`
+	Grade int `json:"grade" db:"grade"`
+}
